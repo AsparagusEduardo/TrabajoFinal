@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+#form1{ width:400px;
+		padding:20px;
+		border:1px solid #000;
+		border-radius:0px 20px;
+		margin: 20px auto;
+}
+.centro { text-align:center; }
+.label{ display:inline-block;
+		width:150px;
+}
+#mensaje_error {
+	color: red;
+	text-align: center;
+}
+
+table{
+	margin: 0px auto;
+	border-collapse: collapse;
+}
+
+th{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+th, td{
+	padding-left: 10px;
+	padding-right: 10px;
+}
