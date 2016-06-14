@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+label{
+	display:block;
+	width:100px;
+	float:left;
+	text-align:right;
+	margin-right:15px;
+	font-weight:bold;
+	margin-top:3PX;
+}
+#formulario{
+	margin:auto;
+	width:300px;
+	background-color:#eee;
+	padding:10px;
+}
+body{
+	font-family:verdana;
+	font-size:12px;
+}
+h2{
+	text-align:center;
+}
+.centro{
+	text-align:center;
+}
