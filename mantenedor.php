@@ -7,7 +7,8 @@
         <script src="js/validar_mantenedor.js"></script>
 	</head>
 	<?php //acceder base de datos
-		$base_musica = new MySQLi("localhost", "root", "", "musica")
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+		$lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
 	?>
 	<body>
 		<div id="bloque_bandas">
@@ -56,6 +57,36 @@
 	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
             	</div>
 			</form>
+			<div id="banda_tabla">
+				<?php
+				$lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+				if (mysqli_num_rows($lista_bandas) > 0)
+				{
+				?>
+					<table border="1">
+	                <tr>
+	                    <th>ID</th>
+	                    <th>NOMBRE</th>
+	                    <th>FOTO</th>
+	                    <th>GÉNERO</th>
+	                    <th>ELIMINAR</th>
+	                </tr>
+	            <?php
+	            }
+	            while ($registro = $lista_bandas -> fetch_assoc())
+	            {?>
+	            	<tr>
+	            		<td><?php echo $registro["id"];?> </td>
+	            		<td><?php echo $registro["nombre"];?></td>
+	            		<td></td>
+	            		<td><?php echo $registro["genero"];?></td>
+	            		<td></td>
+	            	</tr>
+	            <?php
+	            } ?>
+	            </table><br>
+			</div>
+
 		</div>
 
 		<div id="bloque_cds">
@@ -75,8 +106,8 @@
 	                <select name="cd_banda" id="cd_banda">
 	                    <option value="0">Seleccione</option>
 	                    <?php
-	                    $result = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
-	                    while ($registro = $result -> fetch_assoc())
+	                    $lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+	                    while ($registro = $lista_bandas -> fetch_assoc())
                 		{
 	                    ?>
 		                    <option value="<?php echo $registro['nombre'];?>"><?php echo $registro['nombre'];?></option>
