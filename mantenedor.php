@@ -8,7 +8,6 @@
 	</head>
 	<?php //acceder base de datos
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
-		$lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
 	?>
 	<body>
 		<div id="bloque_bandas">
@@ -123,6 +122,35 @@
 	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
             	</div>
 			</form>
+			<div id="cd_tabla">
+				<?php
+				$lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
+				if (mysqli_num_rows($lista_cds) > 0)
+				{
+				?>
+					<table border="1">
+	                <tr>
+	                    <th>ID</th>
+	                    <th>NOMBRE</th>
+	                    <th>CARÁTULA</th>
+	                    <th>BANDA</th>
+	                    <th>ELIMINAR</th>
+	                </tr>
+	            <?php
+	            }
+	            while ($registro = $lista_cds -> fetch_assoc())
+	            {?>
+	            	<tr>
+	            		<td><?php echo $registro["id"];?> </td>
+	            		<td><?php echo $registro["nombre"];?></td>
+	            		<td></td>
+	            		<td><?php echo $registro["banda"];?></td>
+	            		<td></td>
+	            	</tr>
+	            <?php
+	            } ?>
+	            </table><br>
+			</div>
 		</div>
 	</body>
 </html>
