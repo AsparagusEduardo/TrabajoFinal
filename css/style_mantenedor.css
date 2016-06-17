@@ -1,18 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
-#bloque_bandas{
-	border: 1.5px solid #000000;
+#bloque_bandas, #bloque_cds{
+	border: 2px solid #000000;
 	width: 900px;
+	margin: -2px auto;
 }
 
-#form_bandas{ width:350px;
+#form_bandas, #form_cds{ width:420px;
 		padding:20px;
 		border:1px solid #000000;
-		margin: 20px auto;
+		margin: 10px auto;
 }
 .centro { text-align:center; }
 .label{ display:inline-block;
-		width:150px;
+		width:100px;
 }
 #mensaje_error {
 	color: red;

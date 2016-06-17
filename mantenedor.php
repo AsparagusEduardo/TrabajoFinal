@@ -10,7 +10,7 @@
 		$base_musica = new MySQLi("localhost", "root", "", "musica")
 	?>
 	<body>
-		<center><div id="bloque_bandas">
+		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="" enctype="multipart/form-data" onsubmit="">
 				<div class="centro"><h3>NUEVA BANDA</h3></div>
@@ -56,6 +56,42 @@
 	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
             	</div>
 			</form>
-		<div></center>
+		</div>
+
+		<div id="bloque_cds">
+			<div class="centro"><h2>CDs</h2></div>
+			<form name="form_cds" id="form_cds" method="post" action="" enctype="multipart/form-data" onsubmit="">
+				<div class="centro"><h3>NUEVO CD</h3></div>
+				<div>
+					<label class="label" for="cd_nombre">NOMBRE: </label>
+					<input type="text" name="cd_nombre" id="cd_nombre">
+				</div>
+				<div>
+	                <label class="label" for="cd_foto">CARÁTULA: </label>
+	                <input type="file" name="cd_foto" id="cd_foto" />
+	            </div>
+	            <div>
+	                <label class="label" for="cd_banda">BANDA: </label>
+	                <select name="cd_banda" id="cd_banda">
+	                    <option value="0">Seleccione</option>
+	                    <?php
+	                    $result = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+	                    while ($registro = $result -> fetch_assoc())
+                		{
+	                    ?>
+		                    <option value="<?php echo $registro['nombre'];?>"><?php echo $registro['nombre'];?></option>
+		                   <?php
+		                   }?>
+	                </select>
+	            </div>
+				<div>
+	                <p id="banda_error"> </p>
+	            </div>
+				<div class="centro">
+	                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
+	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
+            	</div>
+			</form>
+		</div>
 	</body>
 </html>
