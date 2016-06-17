@@ -1,9 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
-#form1{ width:400px;
+
+#form_bandas{ width:350px;
 		padding:20px;
-		border:1px solid #000;
-		border-radius:0px 20px;
+		border:1px solid #000000;
 		margin: 20px auto;
 }
 .centro { text-align:center; }
