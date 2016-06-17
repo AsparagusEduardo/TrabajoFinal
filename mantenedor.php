@@ -10,21 +10,21 @@
 		$base_musica = new MySQLi("localhost", "root", "", "musica")
 	?>
 	<body>
-		<center><div id="bandas">
+		<center><div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="" enctype="multipart/form-data" onsubmit="">
 				<div class="centro"><h3>NUEVA BANDA</h3></div>
 				<div>
-					<label class="label" for="nombre">NOMBRE: </label>
-					<input type="text" name="nombre" id="nombre">
+					<label class="label" for="banda_nombre">NOMBRE: </label>
+					<input type="text" name="banda_nombre" id="banda_nombre">
 				</div>
 				<div>
-	                <label class="label" for="foto">FOTO: </label>
-	                <input type="file" name="foto" id="foto" />
+	                <label class="label" for="banda_foto">FOTO: </label>
+	                <input type="file" name="banda_foto" id="banda_foto" />
 	            </div>
 	            <div>
-	                <label class="label" for="genero">GÉNERO: </label>
-	                <select name="genero" id="genero">
+	                <label class="label" for="banda_genero">GÉNERO: </label>
+	                <select name="banda_genero" id="banda_genero">
 	                    <option value="0">Seleccione</option>
 	                    <option value="Balada">Balada</option>
 	                    <option value="Ballenato">Ballenato</option>
@@ -49,11 +49,11 @@
 	                </select>
 	            </div>
 				<div>
-	                <p id="mensaje_error"> </p>
+	                <p id="banda_error"> </p>
 	            </div>
 				<div class="centro">
-	                <input type="submit" name="btnEnviar" id="btnEnviar" value="Agregar" />
-	                <input type="reset" name="btnLimpiar" id="btnLimpiar" value="Limpiar" onclick="document.getElementById('mensaje_error').innerHTML = '';" />
+	                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
+	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
             	</div>
 			</form>
 		<div></center>
