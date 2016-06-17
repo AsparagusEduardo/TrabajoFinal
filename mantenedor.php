@@ -10,8 +10,8 @@
 		$base_musica = new MySQLi("localhost", "root", "", "musica")
 	?>
 	<body>
-		<div id="bandas">
-			<h2>BANDAS</h2>
+		<center><div id="bandas">
+			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="" enctype="multipart/form-data" onsubmit="">
 				<div class="centro"><h3>NUEVA BANDA</h3></div>
 				<div>
@@ -56,6 +56,6 @@
 	                <input type="reset" name="btnLimpiar" id="btnLimpiar" value="Limpiar" onclick="document.getElementById('mensaje_error').innerHTML = '';" />
             	</div>
 			</form>
-		<div>
+		<div></center>
 	</body>
 </html>
