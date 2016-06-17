@@ -9,7 +9,7 @@
 	<?php //acceder base de datos
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
 		//---------------------------------------------
-		//AGREGAR A BANDA
+		//AGREGAR BANDA
 		if (isset($_POST["banda_enviar"]))
 		{
 			$nombre = $_POST["banda_nombre"];
@@ -22,6 +22,13 @@
 			{
 				move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
 			}
+		}
+		//----------------------------------------------
+		//ELIMINAR BANDA
+		if (isset($_GET["borrarBanda"]))
+		{
+			$borrarBanda = $_GET['borrarBanda'];
+			$elimiar = $base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
 		}
 
 	?>
@@ -97,7 +104,7 @@
 	            			<div ><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
 	            		</td>
 	            		<td><?php echo $registro["genero"];?></td>
-	            		<td>ELIMINAR</td>
+	            		<td><a href="mantenedor.php?borrarBanda=<?php echo $registro['id'];?>">ELIMINAR</a></td>
 	            	</tr>
 	            <?php
 	            } ?>
@@ -105,7 +112,9 @@
 			</div>
 
 		</div>
-
+					<!--
+					########################### B L O Q U E _ C D S ########################################
+					-->
 		<div id="bloque_cds">
 			<div class="centro"><h2>CDs</h2></div>
 			<form name="form_cds" id="form_cds" method="post" action="" enctype="multipart/form-data" onsubmit="">

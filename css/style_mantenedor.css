@@ -9,7 +9,7 @@
 #form_bandas, #form_cds{ width:420px;
 		padding:20px;
 		border:1px solid #000000;
-		margin: 10px auto;
+		margin: -1px auto;
 }
 .centro { text-align:center; }
 .label{ display:inline-block;
@@ -35,6 +35,6 @@ th, td{
 }
 
 .thumb100{
-	width: 100px;
-	height: 100px;
+	width: 94px;
+	height: 94px;
 	overflow: hidden;}
