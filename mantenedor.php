@@ -8,11 +8,27 @@
 	</head>
 	<?php //acceder base de datos
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
+		//---------------------------------------------
+		//AGREGAR A BANDA
+		if (isset($_POST["banda_enviar"]))
+		{
+			$nombre = $_POST["banda_nombre"];
+			$foto = $_FILES["banda_foto"]["name"];
+			$genero = $_POST["banda_genero"];
+
+			$agregar = $base_musica -> query("INSERT INTO bandas VALUES (null,'$nombre','$foto','$genero')");
+			
+			if($agregar)
+			{
+				move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
+			}
+		}
+
 	?>
 	<body>
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
-			<form name="form_bandas" id="form_bandas" method="post" action="" enctype="multipart/form-data" onsubmit="">
+			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onsubmit="">
 				<div class="centro"><h3>NUEVA BANDA</h3></div>
 				<div>
 					<label class="label" for="banda_nombre">NOMBRE: </label>
