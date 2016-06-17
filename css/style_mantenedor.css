@@ -33,3 +33,8 @@ th, td{
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+.thumb100{
+	width: 100px;
+	height: 100px;
+	overflow: hidden;}

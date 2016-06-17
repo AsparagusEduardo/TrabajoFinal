@@ -93,9 +93,11 @@
 	            	<tr>
 	            		<td><?php echo $registro["id"];?> </td>
 	            		<td><?php echo $registro["nombre"];?></td>
-	            		<td></td>
+	            		<td>
+	            			<div ><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
+	            		</td>
 	            		<td><?php echo $registro["genero"];?></td>
-	            		<td></td>
+	            		<td>ELIMINAR</td>
 	            	</tr>
 	            <?php
 	            } ?>
