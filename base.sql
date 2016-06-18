@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-06-2016 a las 16:25:36
+-- Tiempo de generación: 18-06-2016 a las 22:46:40
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `bandas` (
   `foto` varchar(50) NOT NULL,
   `genero` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -60,16 +60,7 @@ CREATE TABLE IF NOT EXISTS `cds` (
   `banda` varchar(30) NOT NULL,
   `bandaID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
-
---
--- Volcado de datos para la tabla `cds`
---
-
-INSERT INTO `cds` (`id`, `nombre`, `caratula`, `banda`, `bandaID`) VALUES
-(9, 'sdcsd', '9-Pokemon-Bulbasaur-Secret-Garden.jpg', '', 0),
-(10, 'f', 'Dididi.png', '', 0),
-(11, 'ddd', 'Dogcopter.jpeg', 'how much', 5);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

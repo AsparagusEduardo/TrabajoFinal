@@ -1,9 +1,11 @@
 @charset "utf-8";
 /* CSS Document */
 #bloque_bandas, #bloque_cds{
-	border: 2px solid #000000;
-	width: 900px;
+	border: 0px solid #000000;
+	width: 550px;
 	margin: -2px auto;
+	display: inline-block;
+	vertical-align: top;
 }
 
 #form_bandas, #form_cds{ width:420px;

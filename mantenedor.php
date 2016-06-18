@@ -17,7 +17,6 @@
 			move_uploaded_file($_FILES["cd_caratula"]["tmp_name"], "img/cds/".$caratula);
 		}
 	}
-
 	function agregar_banda()
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -33,12 +32,28 @@
 			move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
 		}
 	}
+	function borrar_cd($borrarCd)
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$buscado = $base_musica -> query("SELECT * FROM cds WHERE id = '$borrarCd'") -> fetch_assoc();
+		unlink("img/cds/".$buscado["caratula"]);
+
+		$base_musica -> query("DELETE FROM cds WHERE id = '$borrarCd'");
+	}
 	function borrar_banda($borrarBanda)
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
 
+		$lista_buscado = $base_musica -> query("SELECT * FROM cds WHERE bandaID = '$borrarBanda'");
+		while ($buscado = $lista_buscado -> fetch_assoc())
+		{
+			borrar_cd($buscado["id"]);
+		}
+		$buscado = $base_musica -> query("SELECT * FROM bandas WHERE id = '$borrarBanda'") -> fetch_assoc();
+		unlink("img/bandas/".$buscado["foto"]);
+
 		$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
-		header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 	}
 	
 ?>
@@ -64,6 +79,7 @@
 		if (isset($_GET["borrarBanda"]))
 		{
 			borrar_banda($_GET['borrarBanda']);
+			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
 		//---------------------------------------------
 		//AGREGAR CD
@@ -71,11 +87,19 @@
 		{
 			agregar_cd();
 		}
+		//----------------------------------------------
+		//ELIMINAR CD
+		if (isset($_GET["borrarCd"]))
+		{
+			borrar_cd($_GET['borrarCd']);
+			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
+		}
 	?>
 	<body>
 					<!--
 					########################### B L O Q U E _ C D S ########################################
 					-->
+
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
@@ -160,7 +184,7 @@
 					-->
 		<div id="bloque_cds">
 			<div class="centro"><h2>CDs</h2></div>
-			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onsubmit="">
+			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
 				<div class="centro"><h3>NUEVO CD</h3></div>
 				<div>
 					<label class="label" for="cd_nombre">NOMBRE: </label>
