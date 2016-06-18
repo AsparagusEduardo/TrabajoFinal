@@ -1,3 +1,48 @@
+<?php
+	function agregar_cd()
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$nombre = $_POST["cd_nombre"];
+		$caratula = $_FILES["cd_caratula"]["name"];
+		$bandaID = $_POST["cd_banda"];
+
+		$registro = $base_musica -> query("SELECT * FROM bandas WHERE id = '$bandaID'") -> fetch_assoc();
+		$banda = $registro["nombre"];
+
+		$agregar = $base_musica -> query("INSERT INTO cds VALUES (null,'$nombre','$caratula','$banda','$bandaID')");
+		
+		if($agregar)
+		{
+			move_uploaded_file($_FILES["cd_caratula"]["tmp_name"], "img/cds/".$caratula);
+		}
+	}
+
+	function agregar_banda()
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$nombre = $_POST["banda_nombre"];
+		$foto = $_FILES["banda_foto"]["name"];
+		$genero = $_POST["banda_genero"];
+
+		$agregar = $base_musica -> query("INSERT INTO bandas VALUES (null,'$nombre','$foto','$genero')");
+		
+		if($agregar)
+		{
+			move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
+		}
+	}
+	function borrar_banda($borrarBanda)
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
+		header("location:mantenedor.php"); //<-----Evita que aparezca en la url
+	}
+	
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,44 +57,19 @@
 		//AGREGAR BANDA
 		if (isset($_POST["banda_enviar"]))
 		{
-			$nombre = $_POST["banda_nombre"];
-			$foto = $_FILES["banda_foto"]["name"];
-			$genero = $_POST["banda_genero"];
-
-			$agregar = $base_musica -> query("INSERT INTO bandas VALUES (null,'$nombre','$foto','$genero')");
-			
-			if($agregar)
-			{
-				move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
-			}
+			agregar_banda();
 		}
 		//----------------------------------------------
 		//ELIMINAR BANDA
 		if (isset($_GET["borrarBanda"]))
 		{
-			$borrarBanda = $_GET['borrarBanda'];
-			$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
-			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
+			borrar_banda($_GET['borrarBanda']);
 		}
 		//---------------------------------------------
 		//AGREGAR CD
 		if (isset($_POST["cd_enviar"]))
 		{
-			$nombre = $_POST["cd_nombre"];
-			$caratula = $_FILES["cd_caratula"]["name"];
-			$bandaID = $_POST["cd_banda"];
-
-			$lista_bandas = $base_musica -> query("SELECT * FROM bandas WHERE id = '$bandaID'");
-			$registro = $lista_bandas -> fetch_assoc();
-			$banda = $registro["nombre"];
-
-
-			$agregar = $base_musica -> query("INSERT INTO cds VALUES (null,'$nombre','$caratula','$banda','$bandaID')");
-			
-			if($agregar)
-			{
-				move_uploaded_file($_FILES["cd_caratula"]["tmp_name"], "img/cds/".$caratula);
-			}
+			agregar_cd();
 		}
 	?>
 	<body>
@@ -58,7 +78,7 @@
 					-->
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
-			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onsubmit="">
+			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
 				<div class="centro"><h3>NUEVA BANDA</h3></div>
 				<div>
 					<label class="label" for="banda_nombre">NOMBRE: </label>
@@ -95,7 +115,7 @@
 	                </select>
 	            </div>
 				<div>
-	                <p id="banda_error"> </p>
+	                <p id="banda_error" style="color: red;text-align: center;"> </p>
 	            </div>
 				<div class="centro">
 	                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
@@ -163,7 +183,7 @@
 	                </select>
 	            </div>
 				<div>
-	                <p id="banda_error"> </p>
+	                <p id="cd_error"  style="color: red;text-align: center;"> </p>
 	            </div>
 				<div class="centro">
 	                <input type="submit" name="cd_enviar" id="cd_enviar" value="Agregar" />

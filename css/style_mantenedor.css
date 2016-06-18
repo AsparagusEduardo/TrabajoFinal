@@ -15,10 +15,6 @@
 .label{ display:inline-block;
 		width:100px;
 }
-#mensaje_error {
-	color: red;
-	text-align: center;
-}
 
 table{
 	margin: 0px auto;
