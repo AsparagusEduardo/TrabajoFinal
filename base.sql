@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-06-2016 a las 18:47:27
+-- Tiempo de generación: 18-06-2016 a las 16:25:36
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `bandas` (
   `foto` varchar(50) NOT NULL,
   `genero` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -57,9 +57,19 @@ CREATE TABLE IF NOT EXISTS `cds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
   `caratula` varchar(50) NOT NULL,
-  `banda` int(11) NOT NULL,
+  `banda` varchar(30) NOT NULL,
+  `bandaID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Volcado de datos para la tabla `cds`
+--
+
+INSERT INTO `cds` (`id`, `nombre`, `caratula`, `banda`, `bandaID`) VALUES
+(9, 'sdcsd', '9-Pokemon-Bulbasaur-Secret-Garden.jpg', '', 0),
+(10, 'f', 'Dididi.png', '', 0),
+(11, 'ddd', 'Dogcopter.jpeg', 'how much', 5);
 
 -- --------------------------------------------------------
 
@@ -86,6 +96,13 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `clave` varchar(20) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`login`, `clave`, `nombre`) VALUES
+('admin', '28062016', 'Eduardo Quezada');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

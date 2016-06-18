@@ -29,8 +29,28 @@
 		{
 			$borrarBanda = $_GET['borrarBanda'];
 			$elimiar = $base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
+			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
+		//---------------------------------------------
+		//AGREGAR CD
+		if (isset($_POST["cd_enviar"]))
+		{
+			$nombre = $_POST["cd_nombre"];
+			$caratula = $_FILES["cd_caratula"]["name"];
+			$bandaID = $_POST["cd_banda"];
 
+			$lista_bandas = $base_musica -> query("SELECT * FROM bandas WHERE id = '$bandaID'");
+			$registro = $lista_bandas -> fetch_assoc();
+			$banda = $registro["nombre"];
+
+
+			$agregar = $base_musica -> query("INSERT INTO cds VALUES (null,'$nombre','$caratula','$banda','$bandaID')");
+			
+			if($agregar)
+			{
+				move_uploaded_file($_FILES["cd_caratula"]["tmp_name"], "img/cds/".$caratula);
+			}
+		}
 	?>
 	<body>
 		<div id="bloque_bandas">
@@ -117,15 +137,15 @@
 					-->
 		<div id="bloque_cds">
 			<div class="centro"><h2>CDs</h2></div>
-			<form name="form_cds" id="form_cds" method="post" action="" enctype="multipart/form-data" onsubmit="">
+			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onsubmit="">
 				<div class="centro"><h3>NUEVO CD</h3></div>
 				<div>
 					<label class="label" for="cd_nombre">NOMBRE: </label>
 					<input type="text" name="cd_nombre" id="cd_nombre">
 				</div>
 				<div>
-	                <label class="label" for="cd_foto">CARÁTULA: </label>
-	                <input type="file" name="cd_foto" id="cd_foto" />
+	                <label class="label" for="cd_caratula">CARÁTULA: </label>
+	                <input type="file" name="cd_caratula" id="cd_caratula" />
 	            </div>
 	            <div>
 	                <label class="label" for="cd_banda">BANDA: </label>
@@ -135,18 +155,16 @@
 	                    $lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
 	                    while ($registro = $lista_bandas -> fetch_assoc())
                 		{
-	                    ?>
-		                    <option value="<?php echo $registro['nombre'];?>"><?php echo $registro['nombre'];?></option>
-		                   <?php
-		                   }?>
+                			echo "<option value='".$registro['id']."'>".$registro['nombre']."</option>";	                   
+		                  }?>
 	                </select>
 	            </div>
 				<div>
 	                <p id="banda_error"> </p>
 	            </div>
 				<div class="centro">
-	                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
-	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
+	                <input type="submit" name="cd_enviar" id="cd_enviar" value="Agregar" />
+	                <input type="reset" name="cd_limpiar" id="cd_limpiar" value="Limpiar" onclick="document.getElementById('cd_error').innerHTML = '';" />
             	</div>
 			</form>
 			<div id="cd_tabla">
@@ -161,6 +179,7 @@
 	                    <th>NOMBRE</th>
 	                    <th>CARÁTULA</th>
 	                    <th>BANDA</th>
+	                    <th>ID BANDA</th>
 	                    <th>ELIMINAR</th>
 	                </tr>
 	            <?php
@@ -170,8 +189,11 @@
 	            	<tr>
 	            		<td><?php echo $registro["id"];?> </td>
 	            		<td><?php echo $registro["nombre"];?></td>
-	            		<td></td>
+	            		<td>
+	            			<div ><img class="thumb100" src="img/cds/<?php echo $registro['caratula'];?>"></div>
+	            		</td>
 	            		<td><?php echo $registro["banda"];?></td>
+	            		<td><?php echo $registro["bandaID"];?></td>
 	            		<td></td>
 	            	</tr>
 	            <?php
