@@ -28,7 +28,7 @@
 		if (isset($_GET["borrarBanda"]))
 		{
 			$borrarBanda = $_GET['borrarBanda'];
-			$elimiar = $base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
+			$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
 			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
 		//---------------------------------------------
@@ -53,6 +53,9 @@
 		}
 	?>
 	<body>
+					<!--
+					########################### B L O Q U E _ C D S ########################################
+					-->
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onsubmit="">
@@ -194,7 +197,7 @@
 	            		</td>
 	            		<td><?php echo $registro["banda"];?></td>
 	            		<td><?php echo $registro["bandaID"];?></td>
-	            		<td></td>
+	            		<td><a href="mantenedor.php?borrarCd=<?php echo $registro['id'];?>">ELIMINAR</a></td>
 	            	</tr>
 	            <?php
 	            } ?>
