@@ -66,6 +66,12 @@
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
 
+		$lista_buscado = $base_musica -> query("SELECT * FROM canciones WHERE cdID = '$borrarCd'");
+		while ($buscado = $lista_buscado -> fetch_assoc())
+		{
+			borrar_cancion($buscado["id"]);
+		}
+
 		$buscado = $base_musica -> query("SELECT * FROM cds WHERE id = '$borrarCd'") -> fetch_assoc();
 		unlink("img/cds/".$buscado["caratula"]);
 
