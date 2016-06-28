@@ -1,0 +1,29 @@
+[X]	Se debe utilizar PHP , JavaScript, HTML, motor de base de datos MySQL, hojas de estilo CSS.
+
+[ ]	Crear página de inicio index.php me muestre las bandas (3 mínimo)
+[ ]	Al seleccionar una banda que tenga los link para seleccionar los cds y sus canciones, mostrar la galería de imágenes y noticias de los conciertos de las bandas.
+
+[ ]	Crear un mantenedor.php:
+[ ]	Validar usuario para ingresar al mantenedor y crear la sesión.
+[X]	Agregar, eliminar y listar Bandas
+[X]	Al eliminar una Banda debe eliminar sus Cds y Canciones
+[X]	Agregar, eliminar y listar Cds
+[X]	Agrega Cds si existe la Bandas
+[ ]	Al eliminar un Cds, debe eliminar sus Canciones
+[ ]	Agregar, eliminar y listar Canciones
+[ ]	Agrega Canciones si existe Cds
+[ ]	Buscadores
+[ ]	Buscador de Canciones muestre la letra, el Cd y la Banda
+[ ]	Buscador de Cds muestre el listado de Canciones y la Banda
+[ ]	Buscador de Banda muestre los Cds.
+[ ]	Agregar noticias de conciertos e imágenes de las bandas para la galería de imágenes.
+
+[X]	Crear la base de datos Musica con las Bandas, Cds, Canciones, Noticias y Usuarios.
+[ ]	(basemusica.txt El script de la base de datos debe traer datos de las Bandas, Cds, Canciones y Usuarios.)
+[X]	Bandas: Nombre, Foto, Genero (clásica, rock, balada, etc.).
+[X]	Cds: Nombre, Carátula, Banda
+[X]	Canciones: Nombre, letra, Cds
+[X]	Usuarios: Login, Clave, Nombre
+[X]	Noticias: Titulo, noticia, imagen, fecha.
+[X]	Al agregar copiar los archivos a la carpeta de las imágenes y al eliminar borrar el archivo.
+[ ]	Fecha entrega: en clase entre el 28de junio y 5 de julio
