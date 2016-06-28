@@ -1,4 +1,23 @@
 <?php
+	function agregar_cancion()
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$nombre = $_POST["cancion_nombre"];
+		$letra = $_FILES["cancion_letra"]["name"];
+		$cdID = $_POST["cancion_cd"];
+
+		$registro = $base_musica -> query("SELECT * FROM cds WHERE id = '$cdID'") -> fetch_assoc();
+		$cd = $registro["nombre"];
+
+		$agregar = $base_musica -> query("INSERT INTO canciones VALUES (null,'$nombre','$caratula','$cd','$cdID')");
+		
+		if($agregar)
+		{
+			move_uploaded_file($_FILES["cancion_letra"]["tmp_name"], "txt/letras/".$caratula);
+		}
+	}
+
 	function agregar_cd()
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -96,9 +115,7 @@
 		}
 	?>
 	<body>
-					<!--
-					########################### B L O Q U E _ B A N D A S ########################################
-					-->
+					<!--########################### B L O Q U E _ B A N D A S ########################################-->
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
@@ -177,9 +194,7 @@
 	            </table><br>
 			</div>
 		</div>
-					<!--
-					########################### B L O Q U E _ C D S ########################################
-					-->
+					<!--########################### B L O Q U E _ C D S ########################################-->
 		<div id="bloque_cds">
 			<div class="centro"><h2>CDs</h2></div>
 			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
@@ -246,10 +261,39 @@
 	            </table><br>
 			</div>
 		</div>
-					<!--
-					########################### B L O Q U E _ C A N C I O N E S ########################################
-					-->
+					<!--########################### B L O Q U E _ C A N C I O N E S ########################################-->
 		<div id="bloque_canciones">
+			<div class="centro"><h2>CDs</h2></div>
+			<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
+				<div class="centro"><h3>NUEVO CD</h3></div>
+				<div>
+					<label class="label" for="cancion_nombre">NOMBRE: </label>
+					<input type="text" name="cancion_nombre" id="cancion_nombre">
+				</div>
+				<div>
+					<label class="label" for="cancion_letra">LETRA: </label>
+					<input type="file" name="cancion_letra" id="cancion_letra">
+				</div>
+            	<div>
+	                <label class="label" for="cancion_cd">CD: </label>
+	                <select name="cancion_cd" id="cancion_cd">
+	                    <option value="0">Seleccione</option>
+	                    <?php
+	                    $lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
+	                    while ($registro = $lista_cds -> fetch_assoc())
+                		{
+                			echo "<option value='".$registro['id']."'>".$registro['nombre']." - ".$registro['banda']."</option>";	                   
+		                  }?>
+	                </select>
+	            </div>
+	            <div>
+	                <p id="cancion_error"  style="color: red;text-align: center;"> </p>
+	            </div>
+				<div class="centro">
+	                <input type="submit" name="cancion_enviar" id="cancion_enviar" value="Agregar" />
+	                <input type="reset" name="cancion_limpiar" id="cancion_limpiar" value="Limpiar" onclick="document.getElementById('cancion_error').innerHTML = '';" />
+            	</div>
+			</form>
 		</div>
 
 	</body>

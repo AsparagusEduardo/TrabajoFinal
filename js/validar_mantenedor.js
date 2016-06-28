@@ -87,7 +87,6 @@ function validar_cancion()
 		letra.focus();
 		return false;
 	}
-
 	else if (cd.value == "0")
 	{
 		document.getElementById("cancion_error").innerHTML = "SELECCIONE UN CD";
@@ -95,10 +94,8 @@ function validar_cancion()
 		return false;
 	}
 
-	else
-	{
-		document.getElementById("cancion_error").innerHTML = "";
-	}
+	
+	document.getElementById("cancion_error").innerHTML = "";
 	return true;
 }
 

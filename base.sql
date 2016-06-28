@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-06-2016 a las 22:46:40
+-- Tiempo de generación: 28-06-2016 a las 17:52:29
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -32,7 +32,15 @@ CREATE TABLE IF NOT EXISTS `bandas` (
   `foto` varchar(50) NOT NULL,
   `genero` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `bandas`
+--
+
+INSERT INTO `bandas` (`id`, `nombre`, `foto`, `genero`) VALUES
+(2, 'Electro', 'Ampharos.jpg', 'Electronica'),
+(3, 'Bird of Prey', '016Pidgey.png', 'Popular');
 
 -- --------------------------------------------------------
 
@@ -44,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `canciones` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `letra` varchar(50) NOT NULL,
-  `cds` int(11) NOT NULL
+  `cds` varchar(50) NOT NULL,
+  `cdID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,7 +69,16 @@ CREATE TABLE IF NOT EXISTS `cds` (
   `banda` varchar(30) NOT NULL,
   `bandaID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `cds`
+--
+
+INSERT INTO `cds` (`id`, `nombre`, `caratula`, `banda`, `bandaID`) VALUES
+(3, 'ddd', 'Dratinianime.jpg', 'Electro', 2),
+(5, 'aaaa', 'Lisa_Quagsire.png', 'Electro', 2),
+(6, 'jjjjj', 'Zackies_Bellsprout.jpg', 'Bird of Prey', 3);
 
 -- --------------------------------------------------------
 
