@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-06-2016 a las 17:52:29
+-- Tiempo de generación: 28-06-2016 a las 18:54:05
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -49,12 +49,20 @@ INSERT INTO `bandas` (`id`, `nombre`, `foto`, `genero`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `canciones` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
   `letra` varchar(50) NOT NULL,
   `cds` varchar(50) NOT NULL,
-  `cdID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cdID` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `canciones`
+--
+
+INSERT INTO `canciones` (`id`, `nombre`, `letra`, `cds`, `cdID`) VALUES
+(3, 'sa', 'lista.txt', 'jjjjj', 6);
 
 -- --------------------------------------------------------
 
