@@ -8,7 +8,7 @@
 	vertical-align: top;
 }
 
-#form_bandas, #form_cds{ width:420px;
+#form_bandas, #form_cds, #form_canciones{ width:420px;
 		padding:20px;
 		border:1px solid #000000;
 		margin: -1px auto;

@@ -97,9 +97,8 @@
 	?>
 	<body>
 					<!--
-					########################### B L O Q U E _ C D S ########################################
+					########################### B L O Q U E _ B A N D A S ########################################
 					-->
-
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
@@ -177,7 +176,6 @@
 	            } ?>
 	            </table><br>
 			</div>
-
 		</div>
 					<!--
 					########################### B L O Q U E _ C D S ########################################
@@ -248,5 +246,11 @@
 	            </table><br>
 			</div>
 		</div>
+					<!--
+					########################### B L O Q U E _ C A N C I O N E S ########################################
+					-->
+		<div id="bloque_canciones">
+		</div>
+
 	</body>
 </html>
