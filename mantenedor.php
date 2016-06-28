@@ -90,8 +90,7 @@
 		unlink("img/bandas/".$buscado["foto"]);
 
 		$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
-	}
-	
+	}	
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +101,7 @@
         <link rel="stylesheet" href="css/style_mantenedor.css" />
         <script src="js/validar_mantenedor.js"></script>
 	</head>
-	<?php //acceder base de datos
+	<?php //Agregar y Borrar Bandas
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
 		//---------------------------------------------
 		//AGREGAR BANDA
@@ -144,7 +143,7 @@
 		}
 	?>
 	<body>
-					<!--########################### B L O Q U E _ B A N D A S ########################################-->
+			<!--BLOQUE_BANDAS-->
 		<div id="bloque_bandas">
 			<div class="centro"><h2>BANDAS</h2></div>
 			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
@@ -155,7 +154,7 @@
 				</div>
 				<div>
 	                <label class="label" for="banda_foto">FOTO: </label>
-	                <input type="file" name="banda_foto" id="banda_foto" />
+	                <input type="file" accept=".png,.gif,.jpg,.bmp" name="banda_foto" id="banda_foto" />
 	            </div>
 	            <div>
 	                <label class="label" for="banda_genero">GÉNERO: </label>
@@ -223,7 +222,12 @@
 	            </table><br>
 			</div>
 		</div>
-					<!--########################### B L O Q U E _ C D S ########################################-->
+			<!--BLOQUE_CDS-->
+		<?php
+			$lista_bandas = $base_musica -> query("SELECT * FROM bandas");
+			if (mysqli_num_rows($lista_bandas) > 0)
+			{
+		?>
 		<div id="bloque_cds">
 			<div class="centro"><h2>CDs</h2></div>
 			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
@@ -234,7 +238,7 @@
 				</div>
 				<div>
 	                <label class="label" for="cd_caratula">CARÁTULA: </label>
-	                <input type="file" name="cd_caratula" id="cd_caratula" />
+	                <input type="file" accept=".png,.gif,.jpg,.bmp" name="cd_caratula" id="cd_caratula" />
 	            </div>
 	            <div>
 	                <label class="label" for="cd_banda">BANDA: </label>
@@ -290,7 +294,13 @@
 	            </table><br>
 			</div>
 		</div>
-					<!--########################### B L O Q U E _ C A N C I O N E S ########################################-->
+		<?php
+			}
+			$lista_cds = $base_musica -> query("SELECT * FROM cds");
+			if (mysqli_num_rows($lista_cds) > 0)
+			{
+		?>
+			<!--BLOQUE_CANCIONES-->
 		<div id="bloque_canciones">
 			<div class="centro"><h2>CANCIONES</h2></div>
 			<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
@@ -301,7 +311,7 @@
 				</div>
 				<div>
 					<label class="label" for="cancion_letra">LETRA: </label>
-					<input type="file" name="cancion_letra" id="cancion_letra">
+					<input type="file" accept=".txt" name="cancion_letra" id="cancion_letra">
 				</div>
             	<div>
 	                <label class="label" for="cancion_cd">CD: </label>
@@ -357,6 +367,9 @@
 	            </table><br>
 			</div>
 		</div>
+		<?php
+			}
+		?>
 
 	</body>
 </html>
