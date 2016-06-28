@@ -53,6 +53,15 @@
 			move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
 		}
 	}
+	function borrar_cancion($borrarCancion)
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$buscado = $base_musica -> query("SELECT * FROM canciones WHERE id = '$borrarCancion'") -> fetch_assoc();
+		unlink("txt/letras/".$buscado["letra"]);
+
+		$base_musica -> query("DELETE FROM canciones WHERE id = '$borrarCancion'");
+	}
 	function borrar_cd($borrarCd)
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -116,10 +125,16 @@
 			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
 		//---------------------------------------------
-		//AGREGAR CD
+		//AGREGAR CANCION
 		if (isset($_POST["cancion_enviar"]))
 		{
 			agregar_cancion();
+		}
+		//ELIMINAR CANCION
+		if (isset($_GET["borrarCancion"]))
+		{
+			borrar_cancion($_GET['borrarCancion']);
+			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
 	?>
 	<body>
@@ -302,6 +317,39 @@
 	                <input type="reset" name="cancion_limpiar" id="cancion_limpiar" value="Limpiar" onclick="document.getElementById('cancion_error').innerHTML = '';" />
             	</div>
 			</form>
+			<div id="canciones_tabla">
+				<?php
+				$lista_canciones = $base_musica -> query("SELECT * FROM canciones ORDER BY nombre");
+				if (mysqli_num_rows($lista_canciones) > 0)
+				{
+				?>
+					<table border="1">
+	                <tr>
+	                    <th>ID</th>
+	                    <th>NOMBRE</th>
+	                    <th>LETRA</th>
+	                    <th>CD</th>
+	                    <th>ID CD</th>
+	                    <th>ELIMINAR</th>
+	                </tr>
+	            <?php
+	            }
+	            while ($registro = $lista_canciones -> fetch_assoc())
+	            {?>
+	            	<tr>
+	            		<td><?php echo $registro["id"];?> </td>
+	            		<td><?php echo $registro["nombre"];?></td>
+	            		<td>
+	            			<div><a href="txt/letras/<?php echo $registro['letra']?>">LETRA</a></div>
+	            		</td>
+	            		<td><?php echo $registro["cds"];?></td>
+	            		<td><?php echo $registro["cdID"];?></td>
+	            		<td><a href="mantenedor.php?borrarCancion=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+	            	</tr>
+	            <?php
+	            } ?>
+	            </table><br>
+			</div>
 		</div>
 
 	</body>
