@@ -143,233 +143,258 @@
 		}
 	?>
 	<body>
+		<div id="top"></div>
+		<nav>
+			<ul>
+				<li><a href="#bloque_bandas">Bandas</a></li>
+				<li><a href="#bloque_cds">CDs</a></li>
+				<li><a href="#bloque_canciones">Canciones</a></li>
+				<li style="float:right"><a class="active" href="#bloque_cds">Cerrar Sesión</a></li>
+			</ul>
+		</nav>
+		
 			<!--BLOQUE_BANDAS-->
-		<div id="bloque_bandas">
-			<div class="centro"><h2>BANDAS</h2></div>
-			<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
-				<div class="centro"><h3>NUEVA BANDA</h3></div>
-				<div>
-					<label class="label" for="banda_nombre">NOMBRE: </label>
-					<input type="text" name="banda_nombre" id="banda_nombre">
+		<div id="bloque_listas">
+			<div id="bloque_buscar">
+				<form name="form_buscar" id="form_buscar" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">
+		            <select name="elemento_buscar" id="elemento_buscar">
+		                <option value="0">Seleccione</option>
+		                <option value="bandas">Bandas</option>
+		                <option value="cds">CDs</option>
+		                <option value="canciones">Canciones</option>
+		            </select>
+					<input type="text" name="buscar" id="buscar">
+		            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
+		        </form>
+			</div>
+
+
+			<div id="bloque_bandas">
+				<div class="centro"><h2>BANDAS</h2></div>
+				<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
+					<div class="centro"><h3>NUEVA BANDA</h3></div>
+					<div>
+						<label class="label" for="banda_nombre">NOMBRE: </label>
+						<input type="text" name="banda_nombre" id="banda_nombre">
+					</div>
+					<div>
+		                <label class="label" for="banda_foto">FOTO: </label>
+		                <input type="file" accept=".png,.gif,.jpg,.bmp" name="banda_foto" id="banda_foto" />
+		            </div>
+		            <div>
+		                <label class="label" for="banda_genero">GÉNERO: </label>
+		                <select name="banda_genero" id="banda_genero">
+		                    <option value="0">Seleccione</option>
+		                    <option value="Balada">Balada</option>
+		                    <option value="Ballenato">Ballenato</option>
+		                    <option value="Clasica">Clásica</option>
+		                    <option value="Electronica">Electrónica</option>
+		                    <option value="Flamenco">Flamenco</option>
+		                    <option value="Infantil">Infantil</option>
+		                    <option value="Jazz">Jazz</option>
+		                    <option value="Latina">Latina</option>
+		                    <option value="Pop">Pop</option>
+		                    <option value="Popular">Popular</option>
+		                    <option value="Ranchera">Ranchera</option>
+		                    <option value="Rap">Rap</option>
+		                    <option value="Reggae">Reggae</option>
+		                    <option value="Reggaeton">Reggaeton</option>
+		                    <option value="Rock">Rock</option>
+		                    <option value="Salsa">Salsa</option>
+		                    <option value="Ska">Ska</option>
+		                    <option value="Tango">Tango</option>
+		                    <option value="Techno">Techno</option>
+		                    <option value="Tropical">Tropical</option>
+		                </select>
+		            </div>
+					<div>
+		                <p id="banda_error" style="color: red;text-align: center;"> </p>
+		            </div>
+					<div class="centro">
+		                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
+		                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
+	            	</div>
+				</form>
+				<div id="banda_tabla">
+					<?php
+					$lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+					if (mysqli_num_rows($lista_bandas) > 0)
+					{
+					?>
+						<table border="1">
+		                <tr>
+		                    <th>ID</th>
+		                    <th>NOMBRE</th>
+		                    <th>FOTO</th>
+		                    <th>GÉNERO</th>
+		                    <th>ELIMINAR</th>
+		                </tr>
+		            <?php
+		            }
+		            while ($registro = $lista_bandas -> fetch_assoc())
+		            {?>
+		            	<tr>
+		            		<td><?php echo $registro["id"];?> </td>
+		            		<td><?php echo $registro["nombre"];?></td>
+		            		<td>
+		            			<div class="centro"><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
+		            		</td>
+		            		<td><?php echo $registro["genero"];?></td>
+		            		<td><a href="mantenedor.php?borrarBanda=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+		            	</tr>
+		            <?php
+		            } ?>
+		            </table><br>
 				</div>
-				<div>
-	                <label class="label" for="banda_foto">FOTO: </label>
-	                <input type="file" accept=".png,.gif,.jpg,.bmp" name="banda_foto" id="banda_foto" />
-	            </div>
-	            <div>
-	                <label class="label" for="banda_genero">GÉNERO: </label>
-	                <select name="banda_genero" id="banda_genero">
-	                    <option value="0">Seleccione</option>
-	                    <option value="Balada">Balada</option>
-	                    <option value="Ballenato">Ballenato</option>
-	                    <option value="Clasica">Clásica</option>
-	                    <option value="Electronica">Electrónica</option>
-	                    <option value="Flamenco">Flamenco</option>
-	                    <option value="Infantil">Infantil</option>
-	                    <option value="Jazz">Jazz</option>
-	                    <option value="Latina">Latina</option>
-	                    <option value="Pop">Pop</option>
-	                    <option value="Popular">Popular</option>
-	                    <option value="Ranchera">Ranchera</option>
-	                    <option value="Rap">Rap</option>
-	                    <option value="Reggae">Reggae</option>
-	                    <option value="Reggaeton">Reggaeton</option>
-	                    <option value="Rock">Rock</option>
-	                    <option value="Salsa">Salsa</option>
-	                    <option value="Ska">Ska</option>
-	                    <option value="Tango">Tango</option>
-	                    <option value="Techno">Techno</option>
-	                    <option value="Tropical">Tropical</option>
-	                </select>
-	            </div>
-				<div>
-	                <p id="banda_error" style="color: red;text-align: center;"> </p>
-	            </div>
-				<div class="centro">
-	                <input type="submit" name="banda_enviar" id="banda_enviar" value="Agregar" />
-	                <input type="reset" name="banda_limpiar" id="banda_limpiar" value="Limpiar" onclick="document.getElementById('banda_error').innerHTML = '';" />
-            	</div>
-			</form>
-			<div id="banda_tabla">
-				<?php
-				$lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+			</div>
+				<!--BLOQUE_CDS-->
+			<?php
+				$lista_bandas = $base_musica -> query("SELECT * FROM bandas");
 				if (mysqli_num_rows($lista_bandas) > 0)
 				{
-				?>
-					<table border="1">
-	                <tr>
-	                    <th>ID</th>
-	                    <th>NOMBRE</th>
-	                    <th>FOTO</th>
-	                    <th>GÉNERO</th>
-	                    <th>ELIMINAR</th>
-	                </tr>
-	            <?php
-	            }
-	            while ($registro = $lista_bandas -> fetch_assoc())
-	            {?>
-	            	<tr>
-	            		<td><?php echo $registro["id"];?> </td>
-	            		<td><?php echo $registro["nombre"];?></td>
-	            		<td>
-	            			<div ><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
-	            		</td>
-	            		<td><?php echo $registro["genero"];?></td>
-	            		<td><a href="mantenedor.php?borrarBanda=<?php echo $registro['id'];?>">ELIMINAR</a></td>
-	            	</tr>
-	            <?php
-	            } ?>
-	            </table><br>
-			</div>
-		</div>
-			<!--BLOQUE_CDS-->
-		<?php
-			$lista_bandas = $base_musica -> query("SELECT * FROM bandas");
-			if (mysqli_num_rows($lista_bandas) > 0)
-			{
-		?>
-		<div id="bloque_cds">
-			<div class="centro"><h2>CDs</h2></div>
-			<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
-				<div class="centro"><h3>NUEVO CD</h3></div>
-				<div>
-					<label class="label" for="cd_nombre">NOMBRE: </label>
-					<input type="text" name="cd_nombre" id="cd_nombre">
+			?>
+			<div id="bloque_cds">
+				<div class="centro"><h2>CDs</h2></div>
+				<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
+					<div class="centro"><h3>NUEVO CD</h3></div>
+					<div>
+						<label class="label" for="cd_nombre">NOMBRE: </label>
+						<input type="text" name="cd_nombre" id="cd_nombre">
+					</div>
+					<div>
+		                <label class="label" for="cd_caratula">CARÁTULA: </label>
+		                <input type="file" accept=".png,.gif,.jpg,.bmp" name="cd_caratula" id="cd_caratula" />
+		            </div>
+		            <div>
+		                <label class="label" for="cd_banda">BANDA: </label>
+		                <select name="cd_banda" id="cd_banda">
+		                    <option value="0">Seleccione</option>
+		                    <?php
+		                    $lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
+		                    while ($registro = $lista_bandas -> fetch_assoc())
+	                		{
+	                			echo "<option value='".$registro['id']."'>".$registro['nombre']."</option>";	                   
+			                  }?>
+		                </select>
+		            </div>
+					<div>
+		                <p id="cd_error"  style="color: red;text-align: center;"> </p>
+		            </div>
+					<div class="centro">
+		                <input type="submit" name="cd_enviar" id="cd_enviar" value="Agregar" />
+		                <input type="reset" name="cd_limpiar" id="cd_limpiar" value="Limpiar" onclick="document.getElementById('cd_error').innerHTML = '';" />
+	            	</div>
+				</form>
+				<div id="cd_tabla">
+					<?php
+					$lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
+					if (mysqli_num_rows($lista_cds) > 0)
+					{
+					?>
+						<table border="1">
+		                <tr>
+		                    <th>ID</th>
+		                    <th>NOMBRE</th>
+		                    <th>CARÁTULA</th>
+		                    <th>BANDA</th>
+		                    <th>ID BANDA</th>
+		                    <th>ELIMINAR</th>
+		                </tr>
+		            <?php
+		            }
+		            while ($registro = $lista_cds -> fetch_assoc())
+		            {?>
+		            	<tr>
+		            		<td><?php echo $registro["id"];?> </td>
+		            		<td><?php echo $registro["nombre"];?></td>
+		            		<td>
+		            			<div class="centro"><img class="thumb100" src="img/cds/<?php echo $registro['caratula'];?>"></div>
+		            		</td>
+		            		<td><?php echo $registro["banda"];?></td>
+		            		<td><?php echo $registro["bandaID"];?></td>
+		            		<td><a href="mantenedor.php?borrarCd=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+		            	</tr>
+		            <?php
+		            } ?>
+		            </table><br>
 				</div>
-				<div>
-	                <label class="label" for="cd_caratula">CARÁTULA: </label>
-	                <input type="file" accept=".png,.gif,.jpg,.bmp" name="cd_caratula" id="cd_caratula" />
-	            </div>
-	            <div>
-	                <label class="label" for="cd_banda">BANDA: </label>
-	                <select name="cd_banda" id="cd_banda">
-	                    <option value="0">Seleccione</option>
-	                    <?php
-	                    $lista_bandas = $base_musica -> query("SELECT * FROM bandas ORDER BY nombre");
-	                    while ($registro = $lista_bandas -> fetch_assoc())
-                		{
-                			echo "<option value='".$registro['id']."'>".$registro['nombre']."</option>";	                   
-		                  }?>
-	                </select>
-	            </div>
-				<div>
-	                <p id="cd_error"  style="color: red;text-align: center;"> </p>
-	            </div>
-				<div class="centro">
-	                <input type="submit" name="cd_enviar" id="cd_enviar" value="Agregar" />
-	                <input type="reset" name="cd_limpiar" id="cd_limpiar" value="Limpiar" onclick="document.getElementById('cd_error').innerHTML = '';" />
-            	</div>
-			</form>
-			<div id="cd_tabla">
-				<?php
-				$lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
+			</div>
+			<?php
+				}
+				$lista_cds = $base_musica -> query("SELECT * FROM cds");
 				if (mysqli_num_rows($lista_cds) > 0)
 				{
-				?>
-					<table border="1">
-	                <tr>
-	                    <th>ID</th>
-	                    <th>NOMBRE</th>
-	                    <th>CARÁTULA</th>
-	                    <th>BANDA</th>
-	                    <th>ID BANDA</th>
-	                    <th>ELIMINAR</th>
-	                </tr>
-	            <?php
-	            }
-	            while ($registro = $lista_cds -> fetch_assoc())
-	            {?>
-	            	<tr>
-	            		<td><?php echo $registro["id"];?> </td>
-	            		<td><?php echo $registro["nombre"];?></td>
-	            		<td>
-	            			<div ><img class="thumb100" src="img/cds/<?php echo $registro['caratula'];?>"></div>
-	            		</td>
-	            		<td><?php echo $registro["banda"];?></td>
-	            		<td><?php echo $registro["bandaID"];?></td>
-	            		<td><a href="mantenedor.php?borrarCd=<?php echo $registro['id'];?>">ELIMINAR</a></td>
-	            	</tr>
-	            <?php
-	            } ?>
-	            </table><br>
-			</div>
-		</div>
-		<?php
-			}
-			$lista_cds = $base_musica -> query("SELECT * FROM cds");
-			if (mysqli_num_rows($lista_cds) > 0)
-			{
-		?>
-			<!--BLOQUE_CANCIONES-->
-		<div id="bloque_canciones">
-			<div class="centro"><h2>CANCIONES</h2></div>
-			<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
-				<div class="centro"><h3>NUEVA CANCIÓN</h3></div>
-				<div>
-					<label class="label" for="cancion_nombre">NOMBRE: </label>
-					<input type="text" name="cancion_nombre" id="cancion_nombre">
+			?>
+				<!--BLOQUE_CANCIONES-->
+			<div id="bloque_canciones">
+				<div class="centro"><h2>CANCIONES</h2></div>
+				<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
+					<div class="centro"><h3>NUEVA CANCIÓN</h3></div>
+					<div>
+						<label class="label" for="cancion_nombre">NOMBRE: </label>
+						<input type="text" name="cancion_nombre" id="cancion_nombre">
+					</div>
+					<div>
+						<label class="label" for="cancion_letra">LETRA: </label>
+						<input type="file" accept=".txt" name="cancion_letra" id="cancion_letra">
+					</div>
+	            	<div>
+		                <label class="label" for="cancion_cd">CD: </label>
+		                <select name="cancion_cd" id="cancion_cd">
+		                    <option value="0">Seleccione</option>
+		                    <?php
+		                    $lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda, nombre");
+		                    while ($registro = $lista_cds -> fetch_assoc())
+	                		{
+	                			echo "<option value='".$registro['id']."'>".$registro['nombre']." - ".$registro['banda']."</option>";	                   
+			                  }?>
+		                </select>
+		            </div>
+		            <div>
+		                <p id="cancion_error"  style="color: red;text-align: center;"> </p>
+		            </div>
+					<div class="centro">
+		                <input type="submit" name="cancion_enviar" id="cancion_enviar" value="Agregar" />
+		                <input type="reset" name="cancion_limpiar" id="cancion_limpiar" value="Limpiar" onclick="document.getElementById('cancion_error').innerHTML = '';" />
+	            	</div>
+				</form>
+				<div id="canciones_tabla">
+					<?php
+					$lista_canciones = $base_musica -> query("SELECT * FROM canciones ORDER BY nombre");
+					if (mysqli_num_rows($lista_canciones) > 0)
+					{
+					?>
+						<table border="1">
+		                <tr>
+		                    <th>ID</th>
+		                    <th>NOMBRE</th>
+		                    <th>LETRA</th>
+		                    <th>CD</th>
+		                    <th>ID CD</th>
+		                    <th>ELIMINAR</th>
+		                </tr>
+		            <?php
+		            }
+		            while ($registro = $lista_canciones -> fetch_assoc())
+		            {?>
+		            	<tr>
+		            		<td><?php echo $registro["id"];?> </td>
+		            		<td><?php echo $registro["nombre"];?></td>
+		            		<td>
+		            			<div><a href="txt/letras/<?php echo $registro['letra']?>">LETRA</a></div>
+		            		</td>
+		            		<td><?php echo $registro["cds"];?></td>
+		            		<td><?php echo $registro["cdID"];?></td>
+		            		<td><a href="mantenedor.php?borrarCancion=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+		            	</tr>
+		            <?php
+		            } ?>
+		            </table><br>
 				</div>
-				<div>
-					<label class="label" for="cancion_letra">LETRA: </label>
-					<input type="file" accept=".txt" name="cancion_letra" id="cancion_letra">
-				</div>
-            	<div>
-	                <label class="label" for="cancion_cd">CD: </label>
-	                <select name="cancion_cd" id="cancion_cd">
-	                    <option value="0">Seleccione</option>
-	                    <?php
-	                    $lista_cds = $base_musica -> query("SELECT * FROM cds ORDER BY banda");
-	                    while ($registro = $lista_cds -> fetch_assoc())
-                		{
-                			echo "<option value='".$registro['id']."'>".$registro['nombre']." - ".$registro['banda']."</option>";	                   
-		                  }?>
-	                </select>
-	            </div>
-	            <div>
-	                <p id="cancion_error"  style="color: red;text-align: center;"> </p>
-	            </div>
-				<div class="centro">
-	                <input type="submit" name="cancion_enviar" id="cancion_enviar" value="Agregar" />
-	                <input type="reset" name="cancion_limpiar" id="cancion_limpiar" value="Limpiar" onclick="document.getElementById('cancion_error').innerHTML = '';" />
-            	</div>
-			</form>
-			<div id="canciones_tabla">
-				<?php
-				$lista_canciones = $base_musica -> query("SELECT * FROM canciones ORDER BY nombre");
-				if (mysqli_num_rows($lista_canciones) > 0)
-				{
-				?>
-					<table border="1">
-	                <tr>
-	                    <th>ID</th>
-	                    <th>NOMBRE</th>
-	                    <th>LETRA</th>
-	                    <th>CD</th>
-	                    <th>ID CD</th>
-	                    <th>ELIMINAR</th>
-	                </tr>
-	            <?php
-	            }
-	            while ($registro = $lista_canciones -> fetch_assoc())
-	            {?>
-	            	<tr>
-	            		<td><?php echo $registro["id"];?> </td>
-	            		<td><?php echo $registro["nombre"];?></td>
-	            		<td>
-	            			<div><a href="txt/letras/<?php echo $registro['letra']?>">LETRA</a></div>
-	            		</td>
-	            		<td><?php echo $registro["cds"];?></td>
-	            		<td><?php echo $registro["cdID"];?></td>
-	            		<td><a href="mantenedor.php?borrarCancion=<?php echo $registro['id'];?>">ELIMINAR</a></td>
-	            	</tr>
-	            <?php
-	            } ?>
-	            </table><br>
 			</div>
+			<?php
+				}
+			?>
 		</div>
-		<?php
-			}
-		?>
-
 	</body>
 </html>

@@ -1,14 +1,58 @@
 @charset "utf-8";
 /* CSS Document */
-#bloque_bandas, #bloque_cds{
-	border: 0px solid #000000;
-	width: 550px;
-	margin: -2px auto;
-	display: inline-block;
-	vertical-align: top;
+body
+{
+	background-color: #2b313b;
 }
 
-#form_bandas, #form_cds, #form_canciones{ width:420px;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #111111;
+}
+nav li {
+    float: left;
+
+}
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav li a:hover:not(.active) {
+    background-color: #333;
+}
+.active {
+    background-color: #4CAF50;
+}
+
+#bloque_listas{
+	width: 600px;
+	margin: 0 auto;
+}
+
+#bloque_buscar, #bloque_bandas, #bloque_cds, #bloque_canciones{
+	border: 0px solid #000000;
+	margin: 10px auto;
+	display: block;
+	vertical-align: top;
+	background-color: #6980a5;
+	border-radius: 20px;
+}
+
+#form_buscar{
+		width:420px;
+		padding:20px;
+		border:0px solid #000000;
+		margin: 0 auto;
+}
+
+#form_bandas, #form_cds, #form_canciones{
+		width:420px;
 		padding:20px;
 		border:1px solid #000000;
 		margin: -1px auto;
@@ -18,9 +62,19 @@
 		width:100px;
 }
 
+h2{
+	padding-top: 10px;
+}
+
+h3{
+	margin: 0;
+	padding-bottom: 10px;
+}
+
 table{
 	margin: 0px auto;
 	border-collapse: collapse;
+	border: 1px solid black;
 }
 
 th{
@@ -33,6 +87,11 @@ th, td{
 }
 
 .thumb100{
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+.thumb50{
+	width: 50px;
+	height: 50px;
 	overflow: hidden;}
