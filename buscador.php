@@ -45,30 +45,39 @@
 						if ($num_resultados > 0)
 						{?>
 							<table border="1">
-			                <tr>
-			                    <th>ID</th>
-			                    <th>NOMBRE</th>
-			                    <th>FOTO</th>
-			                    <th>GÉNERO</th>
-			                    <th>ELIMINAR</th>
-			                </tr>
 						<?php
 						}
 						while ($registro = $lista_bandas -> fetch_assoc())
 						{?>
 			            	<tr>
-			            		<td><?php echo $registro["id"];?> </td>
-			            		<td><?php echo $registro["nombre"];?></td>
+			            		<td><b><?php echo $registro["nombre"];?></b></td>
 			            		<td>
 			            			<div class="centro"><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
 			            		</td>
-			            		<td><?php echo $registro["genero"];?></td>
-			            		<td><a href="mantenedor.php?borrarBanda=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+			            	</tr>
+			            	<tr>
+			            		<td colspan="2"><?php
+			            			$hmm = $registro['id'];
+			            			$lista_cds = $base_musica -> query("SELECT * FROM cds WHERE bandaID = '$hmm' ORDER BY nombre");
+			            			while ($registro2 = $lista_cds -> fetch_assoc()) //CDS DE LA BANDA
+			            			{?>
+			            			<table class="inside_table" border="0">
+			            				<tr>
+			            					<td><img class="thumb100" src="img/cds/<?php echo $registro2["caratula"]?>"></td>
+			            					<td><?php echo $registro2["nombre"];?></td>
+			            				</tr>
+
+			            			</table>
+			            			<?php
+			            			}
+
+			            			?>
+			            		</td>
 			            	</tr>
 			            <?php
 						}
 					}
-					if ($categoria == "cds") //BUSQUEDA POR BANDAS
+					if ($categoria == "cds") //BUSQUEDA POR CDS
 					{
 						$lista_cds = $base_musica -> query("SELECT * FROM $categoria WHERE nombre LIKE '%$elemento%' ORDER BY nombre");
 						$num_resultados = mysqli_num_rows($lista_cds);
