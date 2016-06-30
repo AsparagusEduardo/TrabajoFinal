@@ -31,11 +31,11 @@ nav li a:hover:not(.active) {
 }
 
 #bloque_listas{
-	width: 600px;
 	margin: 0 auto;
 }
 
-#bloque_buscar, #bloque_bandas, #bloque_cds, #bloque_canciones{
+#bloque_buscar, #bloque_bandas, #bloque_cds, #bloque_canciones, #bloque_resultado{
+	width: 600px;
 	border: 0px solid #000000;
 	margin: 10px auto;
 	display: block;
@@ -43,6 +43,7 @@ nav li a:hover:not(.active) {
 	background-color: #6980a5;
 	border-radius: 20px;
 }
+
 
 #form_buscar{
 		width:420px;
@@ -69,6 +70,7 @@ h2{
 h3{
 	margin: 0;
 	padding-bottom: 10px;
+	text-align: center;
 }
 
 table{

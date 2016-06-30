@@ -156,7 +156,8 @@
 			<!--BLOQUE_BANDAS-->
 		<div id="bloque_listas">
 			<div id="bloque_buscar">
-				<form name="form_buscar" id="form_buscar" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">
+				<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
+				<!--<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">-->
 		            <select name="elemento_buscar" id="elemento_buscar">
 		                <option value="0">Seleccione</option>
 		                <option value="bandas">Bandas</option>
@@ -167,7 +168,6 @@
 		            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 		        </form>
 			</div>
-
 
 			<div id="bloque_bandas">
 				<div class="centro"><h2>BANDAS</h2></div>
