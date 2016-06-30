@@ -18,13 +18,13 @@
 		<div id="bloque_buscar">
 			<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
 			<!--<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">-->
-	            <select name="elemento_buscar" id="elemento_buscar">
+	            <select name="categoria_buscar" id="categoria_buscar">
 	                <option value="0">Seleccione</option>
 	                <option value="bandas">Bandas</option>
 	                <option value="cds">CDs</option>
 	                <option value="canciones">Canciones</option>
 	            </select>
-				<input type="text" name="buscar" id="buscar">
+				<input type="text" name="elemento_buscar" id="elemento_buscar">
 	            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 	        </form>
 		</div>
@@ -32,8 +32,22 @@
 			<?php 
 				if (isset($_POST["buscar_enviar"]))
 				{
+					$categoria = $_POST["categoria_buscar"];
+					$elemento = $_POST["elemento_buscar"];
+
+					if ($categoria == "bandas") //BUSQUEDA POR BANDAS
+					{
+						$lista_bandas = $base_musica -> query("SELECT * FROM $categoria WHERE nombre LIKE '%$elemento%' ORDER BY nombre");
+						$num_resultados = mysqli_num_rows($lista_bandas);
+
+						echo "<h3>".$num_resultados." banda(s) encontradas.</h3>";
+						while ($registro = $lista_bandas -> fetch_assoc())
+						{
+							echo $registro["nombre"];
+						}
+						
+					}
 					
-					echo "<h3>Buscando ".$_POST["elemento_buscar"]."</h3>";
 				}
 			?>
 		</div>
