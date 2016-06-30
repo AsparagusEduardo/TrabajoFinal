@@ -70,7 +70,6 @@
 			            			</table>
 			            			<?php
 			            			}
-
 			            			?>
 			            		</td>
 			            	</tr>
@@ -102,7 +101,23 @@
 				            		</td>
 				            	</tr>
 				            	<tr>
-				            	<td colspan="3"></td>
+				            	<td colspan="3"><?php //CANCIONES DEL CD
+			            			$hmm = $registro['id'];
+			            			$lista_canciones = $base_musica -> query("SELECT * FROM canciones WHERE cdID = '$hmm' ORDER BY nombre");
+			            			while ($registro2 = $lista_canciones -> fetch_assoc()) 
+			            			{?>
+			            			<table class="inside_table" border="0">
+			            				<tr>
+			            					<td><?php echo "- ".$registro2["nombre"]."<br>";?></td>
+			            				</tr>
+
+			            			</table>
+			            			<?php
+			            			}
+
+			            			?>
+				            		
+				            	</td>
 				            	</tr>
 				            <?php
 						}
