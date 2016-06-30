@@ -41,15 +41,70 @@
 						$num_resultados = mysqli_num_rows($lista_bandas);
 
 						echo "<h3>".$num_resultados." banda(s) encontradas.</h3>";
-						while ($registro = $lista_bandas -> fetch_assoc())
-						{
-							echo $registro["nombre"];
+
+						if ($num_resultados > 0)
+						{?>
+							<table border="1">
+			                <tr>
+			                    <th>ID</th>
+			                    <th>NOMBRE</th>
+			                    <th>FOTO</th>
+			                    <th>GÉNERO</th>
+			                    <th>ELIMINAR</th>
+			                </tr>
+						<?php
 						}
-						
+						while ($registro = $lista_bandas -> fetch_assoc())
+						{?>
+			            	<tr>
+			            		<td><?php echo $registro["id"];?> </td>
+			            		<td><?php echo $registro["nombre"];?></td>
+			            		<td>
+			            			<div class="centro"><img class="thumb100" src="img/bandas/<?php echo $registro['foto'];?>"></div>
+			            		</td>
+			            		<td><?php echo $registro["genero"];?></td>
+			            		<td><a href="mantenedor.php?borrarBanda=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+			            	</tr>
+			            <?php
+						}
 					}
-					
+					if ($categoria == "cds") //BUSQUEDA POR BANDAS
+					{
+						$lista_cds = $base_musica -> query("SELECT * FROM $categoria WHERE nombre LIKE '%$elemento%' ORDER BY nombre");
+						$num_resultados = mysqli_num_rows($lista_cds);
+
+						echo "<h3>".$num_resultados." CD(s) encontrado(s).</h3>";
+
+						if ($num_resultados > 0)
+						{?>
+							<table border="1">
+				                <tr>
+				                    <th>ID</th>
+				                    <th>NOMBRE</th>
+				                    <th>CARÁTULA</th>
+				                    <th>BANDA</th>
+				                    <th>ID BANDA</th>
+				                    <th>ELIMINAR</th>
+				                </tr>
+				            <?php
+				            }
+				            while ($registro = $lista_cds -> fetch_assoc())
+				            {?>
+				            	<tr>
+				            		<td><?php echo $registro["id"];?> </td>
+				            		<td><?php echo $registro["nombre"];?></td>
+				            		<td>
+				            			<div class="centro"><img class="thumb100" src="img/cds/<?php echo $registro['caratula'];?>"></div>
+				            		</td>
+				            		<td><?php echo $registro["banda"];?></td>
+				            		<td><?php echo $registro["bandaID"];?></td>
+				            		<td><a href="mantenedor.php?borrarCd=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+				            	</tr>
+				            <?php
+						}
+					}
 				}
-			?>
+			?></table><br>
 		</div>
 	</body>
 </html>
