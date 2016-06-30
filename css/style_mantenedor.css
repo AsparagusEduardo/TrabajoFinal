@@ -46,7 +46,7 @@ nav li a:hover:not(.active) {
 
 
 #form_buscar{
-		width:420px;
+		max-width: 330px;
 		padding:20px;
 		border:0px solid #000000;
 		margin: 0 auto;

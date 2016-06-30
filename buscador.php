@@ -18,13 +18,13 @@
 		<div id="bloque_buscar">
 			<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
 			<!--<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">-->
-	            <select name="categoria_buscar" id="categoria_buscar">
-	                <option value="0">Seleccione</option>
-	                <option value="bandas">Bandas</option>
-	                <option value="cds">CDs</option>
-	                <option value="canciones">Canciones</option>
-	            </select>
-				<input type="text" name="elemento_buscar" id="elemento_buscar">
+				<input type="text" name="elemento_buscar" id="elemento_buscar" placeholder="Buscar por nombre">
+		            <select name="categoria_buscar" id="categoria_buscar">
+		                <option value="0">Categoría</option>
+		                <option value="bandas">Bandas</option>
+		                <option value="cds">CDs</option>
+		                <option value="canciones">Canciones</option>
+		            </select>
 	            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 	        </form>
 		</div>
@@ -56,10 +56,10 @@
 			            		</td>
 			            	</tr>
 			            	<tr>
-			            		<td colspan="2"><?php
+			            		<td colspan="2"><?php //CDS DE LA BANDA
 			            			$hmm = $registro['id'];
 			            			$lista_cds = $base_musica -> query("SELECT * FROM cds WHERE bandaID = '$hmm' ORDER BY nombre");
-			            			while ($registro2 = $lista_cds -> fetch_assoc()) //CDS DE LA BANDA
+			            			while ($registro2 = $lista_cds -> fetch_assoc()) 
 			            			{?>
 			            			<table class="inside_table" border="0">
 			            				<tr>
@@ -87,27 +87,22 @@
 						if ($num_resultados > 0)
 						{?>
 							<table border="1">
-				                <tr>
-				                    <th>ID</th>
-				                    <th>NOMBRE</th>
-				                    <th>CARÁTULA</th>
-				                    <th>BANDA</th>
-				                    <th>ID BANDA</th>
-				                    <th>ELIMINAR</th>
-				                </tr>
 				            <?php
 				            }
 				            while ($registro = $lista_cds -> fetch_assoc())
 				            {?>
 				            	<tr>
-				            		<td><?php echo $registro["id"];?> </td>
-				            		<td><?php echo $registro["nombre"];?></td>
 				            		<td>
 				            			<div class="centro"><img class="thumb100" src="img/cds/<?php echo $registro['caratula'];?>"></div>
 				            		</td>
-				            		<td><?php echo $registro["banda"];?></td>
-				            		<td><?php echo $registro["bandaID"];?></td>
-				            		<td><a href="mantenedor.php?borrarCd=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+				            		<td><b><?php echo $registro["nombre"];?><b></td>
+				            		<td>
+				            			<u>BANDA:</u><br>
+				            			<?php echo $registro["banda"];?>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            	<td colspan="3"></td>
 				            	</tr>
 				            <?php
 						}

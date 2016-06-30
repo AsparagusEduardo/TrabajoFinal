@@ -158,13 +158,13 @@
 			<div id="bloque_buscar">
 				<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
 				<!--<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">-->
+					<input type="text" name="elemento_buscar" id="elemento_buscar" placeholder="Buscar por nombre">
 		            <select name="categoria_buscar" id="categoria_buscar">
 		                <option value="0">Seleccione</option>
 		                <option value="bandas">Bandas</option>
 		                <option value="cds">CDs</option>
 		                <option value="canciones">Canciones</option>
 		            </select>
-					<input type="text" name="buscar" id="buscar">
 		            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 		        </form>
 			</div>
