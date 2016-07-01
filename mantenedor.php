@@ -152,12 +152,10 @@
 				<li style="float:right"><a class="active" href="#bloque_cds">Cerrar Sesión</a></li>
 			</ul>
 		</nav>
-		
 			<!--BLOQUE_BANDAS-->
 		<div id="bloque_listas">
 			<div id="bloque_buscar">
 				<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
-				<!--<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="return validar_busqueda();">-->
 					<input type="text" name="elemento_buscar" id="elemento_buscar" placeholder="Buscar por nombre">
 		            <select name="categoria_buscar" id="categoria_buscar">
 		                <option value="0">Seleccione</option>
@@ -253,6 +251,9 @@
 				if (mysqli_num_rows($lista_bandas) > 0)
 				{
 			?>
+			<div class="to_top">
+				<a href="#top">VOLVER ARRIBA</a>
+			</div>
 			<div id="bloque_cds">
 				<div class="centro"><h2>CDs</h2></div>
 				<form name="form_cds" id="form_cds" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cd();">
@@ -326,6 +327,9 @@
 				{
 			?>
 				<!--BLOQUE_CANCIONES-->
+			<div class="to_top">
+				<a href="#top">VOLVER ARRIBA</a>
+			</div>
 			<div id="bloque_canciones">
 				<div class="centro"><h2>CANCIONES</h2></div>
 				<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
@@ -395,6 +399,9 @@
 			<?php
 				}
 			?>
+			<div class="to_top">
+				<a href="#top">VOLVER ARRIBA</a>
+			</div>
 		</div>
 	</body>
 </html>
