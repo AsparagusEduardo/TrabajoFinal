@@ -122,6 +122,49 @@
 				            <?php
 						}
 					}
+
+					if ($categoria == "canciones") //BUSQUEDA POR CANCIONES
+					{
+						$lista_canciones = $base_musica -> query("SELECT * FROM $categoria WHERE nombre LIKE '%$elemento%' ORDER BY nombre");
+						$num_resultados = mysqli_num_rows($lista_canciones);
+
+						echo "<h3>".$num_resultados." cancione(s) encontrada(s).</h3>";
+
+						if ($num_resultados > 0)
+						{?>
+							<table border="1">
+				            <?php
+				            }
+				            while ($registro = $lista_canciones -> fetch_assoc())
+				            {?>
+				            	<tr>
+				            		<td><b><?php echo $registro["nombre"];?><b></td>
+				            		<td>
+				            			<u>BANDA:</u><br>
+				            			<?php 
+					            			$hmm = $registro['cdID'];
+					            			$lista_cds = $base_musica -> query("SELECT * FROM cds WHERE id = '$hmm' ORDER BY nombre");
+					            			$registro2 = $lista_cds -> fetch_assoc();
+					            			echo $registro2["banda"];?>
+				            		</td>
+				            		<td>
+				            			<u>CD:</u><br>
+				            			<?php echo $registro["cds"];?>
+				            		</td>
+				            	</tr>
+				            	<tr>
+					            	<td colspan="3">
+				            			<table class="inside_table" border="0">
+				            				<tr>
+				            					<td><?php echo nl2br(file_get_contents("txt/letras/".$registro["letra"]));?></td>
+				            				</tr>
+
+				            			</table>					            		
+					            	</td>
+				            	</tr>
+				            <?php
+						}
+					}
 				}
 			?></table><br>
 		</div>
