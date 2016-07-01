@@ -11,7 +11,7 @@
 	<body>
 		<nav>
 			<ul>
-				<li><a href="#bloque_noticias">Noticias</a></li>
+				<li><a href="mantenedor.php#bloque_noticias">Noticias</a></li>
 				<li><a href="mantenedor.php#bloque_bandas">Bandas</a></li>
 				<li><a href="mantenedor.php#bloque_cds">CDs</a></li>
 				<li><a href="mantenedor.php#bloque_canciones">Canciones</a></li>

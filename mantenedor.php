@@ -1,4 +1,20 @@
 <?php
+	function agregar_noticia()
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$titulo = $_POST["noticia_titulo"];
+		$texto = $_POST["noticia_texto"];
+		$imagen = $_FILES["noticia_foto"]["name"];
+		$fecha = $_POST["noticia_fecha"];
+
+		$agregar = $base_musica -> query("INSERT INTO noticias VALUES (null,'$titulo','$texto','$imagen','$fecha')");
+		
+		if($agregar)
+		{
+			move_uploaded_file($_FILES["noticia_foto"]["tmp_name"], "img/noticias/".$imagen);
+		}
+	}
 	function agregar_cancion()
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -19,7 +35,6 @@
 		}
 		/* else{echo $base_musica -> error;}*/
 	}
-
 	function agregar_cd()
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -92,7 +107,6 @@
 		$base_musica -> query("DELETE FROM bandas WHERE id = '$borrarBanda'");
 	}	
 ?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -153,8 +167,9 @@
 				<li style="float:right"><a class="active" href="#bloque_cds">Cerrar Sesión</a></li>
 			</ul>
 		</nav>
-			<!--BLOQUE_BANDAS-->
+			
 		<div id="bloque_listas">
+				<!--BLOQUE_BUSCAR-->
 			<div id="bloque_buscar">
 				<form name="form_buscar" id="form_buscar" method="post" action="buscador.php" enctype="multipart/form-data" onSubmit="">
 					<input type="text" name="elemento_buscar" id="elemento_buscar" placeholder="Buscar por nombre">
@@ -167,7 +182,7 @@
 		            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 		        </form>
 			</div>
-
+				<!--BLOQUE_NOTICIAS-->
 			<div id="bloque_noticias">
 				<div class="centro"><h2>NOTICIAS</h2></div>
 				<form name="form_noticias" id="form_noticias" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_noticia();">
@@ -222,7 +237,10 @@
 		            </table><br>
 				</div>
 			</div>
-
+			<div class="to_top">
+				<a href="#top">VOLVER ARRIBA</a>
+			</div>
+				<!--BLOQUE_BANDAS-->
 			<div id="bloque_bandas">
 				<div class="centro"><h2>BANDAS</h2></div>
 				<form name="form_bandas" id="form_bandas" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_banda();">
