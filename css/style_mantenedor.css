@@ -34,7 +34,7 @@ nav li a:hover:not(.active) {
 	margin: 0 auto;
 }
 
-#bloque_buscar, #bloque_bandas, #bloque_cds, #bloque_canciones, #bloque_resultado{
+#bloque_buscar, #bloque_bandas, #bloque_cds, #bloque_canciones, #bloque_resultado, #bloque_noticias{
 	width: 600px;
 	border: 0px solid #000000;
 	margin: 10px auto;
@@ -52,7 +52,7 @@ nav li a:hover:not(.active) {
 		margin: 0 auto;
 }
 
-#form_bandas, #form_cds, #form_canciones{
+#form_bandas, #form_cds, #form_canciones, #form_noticias{
 		width:420px;
 		padding:20px;
 		border:1px solid #000000;

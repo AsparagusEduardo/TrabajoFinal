@@ -146,6 +146,7 @@
 		<div id="top"></div>
 		<nav>
 			<ul>
+				<li><a href="#bloque_noticias">Noticias</a></li>
 				<li><a href="#bloque_bandas">Bandas</a></li>
 				<li><a href="#bloque_cds">CDs</a></li>
 				<li><a href="#bloque_canciones">Canciones</a></li>
@@ -165,6 +166,61 @@
 		            </select>
 		            <input type="submit" name="buscar_enviar" id="buscar_enviar" value="Buscar" />
 		        </form>
+			</div>
+
+			<div id="bloque_noticias">
+				<div class="centro"><h2>NOTICIAS</h2></div>
+				<form name="form_noticias" id="form_noticias" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_noticia();">
+					<div class="centro"><h3>NUEVA NOTICIA</h3></div>
+					<div>
+						<label class="label" for="noticia_titulo">NOMBRE: </label>
+						<input type="text" name="noticia_titulo" id="noticia_titulo">
+					</div>
+					<div>
+		                <label class="label" for="noticia_foto">FOTO: </label>
+		                <input type="file" accept=".png,.gif,.jpg,.bmp" name="noticia_foto" id="noticia_foto" />
+		            </div>
+					<div>
+		                <p id="noticia_error"  style="color: red;text-align: center;"> </p>
+		            </div>
+					<div class="centro">
+		                <input type="submit" name="noticia_enviar" id="noticia_enviar" value="Agregar" />
+		                <input type="reset" name="noticia_limpiar" id="noticia_limpiar" value="Limpiar" onclick="document.getElementById('noticia_error').innerHTML = '';" />
+	            	</div>
+				</form>
+				<div id="noticia_tabla">
+					<?php
+					$lista_noticias = $base_musica -> query("SELECT * FROM noticias ORDER BY fecha DESC");
+					if (mysqli_num_rows($lista_noticias) > 0)
+					{
+					?>
+						<table border="1">
+		                <tr>
+		                    <th>ID</th>
+		                    <th>TITULO</th>
+		                    <th>NOTICIA</th>
+		                    <th>IMAGEN</th>
+		                    <th>FECHA</th>
+		                    <th>ELIMINAR</th>
+		                </tr>
+		            <?php
+		            }
+		            while ($registro = $lista_noticias -> fetch_assoc())
+		            {?>
+		            	<tr>
+		            		<td><?php echo $registro["id"];?> </td>
+		            		<td><?php echo $registro["titulo"];?></td>
+		            		<td><?php echo $registro["noticia"];?></td>
+		            		<td>
+		            			<div class="centro"><img src="img/noticias/<?php echo $registro['foto'];?>"></div>
+		            		</td>
+		            		<td><?php echo $registro["fecha"];?></td>
+		            		<td><a href="mantenedor.php?borrarNoticia=<?php echo $registro['id'];?>">ELIMINAR</a></td>
+		            	</tr>
+		            <?php
+		            } ?>
+		            </table><br>
+				</div>
 			</div>
 
 			<div id="bloque_bandas">
@@ -327,9 +383,7 @@
 				{
 			?>
 				<!--BLOQUE_CANCIONES-->
-			<div class="to_top">
-				<a href="#top">VOLVER ARRIBA</a>
-			</div>
+
 			<div id="bloque_canciones">
 				<div class="centro"><h2>CANCIONES</h2></div>
 				<form name="form_canciones" id="form_canciones" method="post" action="mantenedor.php" enctype="multipart/form-data" onSubmit="return validar_cancion();">
@@ -399,9 +453,6 @@
 			<?php
 				}
 			?>
-			<div class="to_top">
-				<a href="#top">VOLVER ARRIBA</a>
-			</div>
 		</div>
 	</body>
 </html>
