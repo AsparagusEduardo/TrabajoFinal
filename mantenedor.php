@@ -115,8 +115,14 @@
         <link rel="stylesheet" href="css/style_mantenedor.css" />
         <script src="js/validar_mantenedor.js"></script>
 	</head>
-	<?php //Agregar y Borrar Bandas
+	<?php //Agregar y Borrar noticias, bandas, cds y canciones
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
+		//---------------------------------------------
+		//AGREGAR NOTICIA
+		if (isset($_POST["noticia_enviar"]))
+		{
+			agregar_noticia();
+		}
 		//---------------------------------------------
 		//AGREGAR BANDA
 		if (isset($_POST["banda_enviar"]))
@@ -192,8 +198,16 @@
 						<input type="text" name="noticia_titulo" id="noticia_titulo">
 					</div>
 					<div>
+						<label class="label" for="noticia_texto">TEXTO: </label>
+						<textarea rows="5" name="noticia_texto" style="width: 300px;"></textarea>
+					</div>
+					<div>
 		                <label class="label" for="noticia_foto">FOTO: </label>
 		                <input type="file" accept=".png,.gif,.jpg,.bmp" name="noticia_foto" id="noticia_foto" />
+		            </div>
+		            <div>
+		            	<label class="label" for="noticia_fecha">FECHA: </label>
+		            	<input type="date" name="noticia_fecha" id="noticia_fecha">
 		            </div>
 					<div>
 		                <p id="noticia_error"  style="color: red;text-align: center;"> </p>
@@ -227,7 +241,7 @@
 		            		<td><?php echo $registro["titulo"];?></td>
 		            		<td><?php echo $registro["noticia"];?></td>
 		            		<td>
-		            			<div class="centro"><img src="img/noticias/<?php echo $registro['foto'];?>"></div>
+		            			<div class="centro"><img src="img/noticias/<?php echo $registro['imagen'];?>"></div>
 		            		</td>
 		            		<td><?php echo $registro["fecha"];?></td>
 		            		<td><a href="mantenedor.php?borrarNoticia=<?php echo $registro['id'];?>">ELIMINAR</a></td>
