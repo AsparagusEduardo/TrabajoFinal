@@ -7,7 +7,7 @@
 <body>
 	<header>
 		<h1>
-		<img  src="../Imagenes/corso-musica.jpg" class="fade" alt="web2.0" title="web2.0">
+		<img  src="img/menu/corso-musica.jpg" class="fade" alt="web2.0" title="web2.0">
 		</h1>
 		<nav>
 			<ul>
