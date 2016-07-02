@@ -68,6 +68,15 @@
 			move_uploaded_file($_FILES["banda_foto"]["tmp_name"], "img/bandas/".$foto);
 		}
 	}
+	function borrar_noticia($borrarNoticia)
+	{
+		$base_musica = new MySQLi("localhost", "root", "", "musica");
+
+		$buscado = $base_musica -> query("SELECT * FROM noticias WHERE id = '$borrarNoticia'") -> fetch_assoc();
+		unlink("img/noticias/".$buscado["imagen"]);
+
+		$base_musica -> query("DELETE FROM noticias WHERE id = '$borrarNoticia'");
+	}
 	function borrar_cancion($borrarCancion)
 	{
 		$base_musica = new MySQLi("localhost", "root", "", "musica");
@@ -123,6 +132,13 @@
 		{
 			agregar_noticia();
 		}
+		//----------------------------------------------
+		//ELIMINAR NOTICIA
+		if (isset($_GET["borrarNoticia"]))
+		{
+			borrar_noticia($_GET['borrarNoticia']);
+			//header("location:mantenedor.php"); //<-----Evita que aparezca en la url
+		}
 		//---------------------------------------------
 		//AGREGAR BANDA
 		if (isset($_POST["banda_enviar"]))
@@ -170,7 +186,7 @@
 				<li><a href="#bloque_bandas">Bandas</a></li>
 				<li><a href="#bloque_cds">CDs</a></li>
 				<li><a href="#bloque_canciones">Canciones</a></li>
-				<li style="float:right"><a class="active" href="#bloque_cds">Cerrar Sesión</a></li>
+				<li style="float:right"><a class="active" href="">Cerrar Sesión</a></li>
 			</ul>
 		</nav>
 			
