@@ -7,7 +7,7 @@
     <script src="http://notoyontoy.site40.net/Js/jquery.infinitecarousel3.min.js"></script>
     <script type="text/javascript" src="http://notoyontoy.site40.net/Js/easing.js"></script>
     <script src ="js/jsDiscografia.js"></script>
-    <link rel="stylesheet" href="../Estilos/estiloDiscografia.css" type="text/css" />
+    <link rel="stylesheet" href="css/style_iscografia.css" type="text/css" />
 	<meta charset="UTF-8">
 </head>
 <body>
