@@ -1,4 +1,36 @@
-// JavaScript Document
+function validar_noticia()
+{
+	titulo = document.getElementById("noticia_titulo");
+	texto = document.getElementById("noticia_texto");
+	imagen = document.getElementById("noticia_imagen");
+	fecha = document.getElementById("noticia_fecha");
+
+	if (titulo.value == "")
+	{
+		document.getElementById("noticia_error").innerHTML = "TITULO OBLIGATORIO";
+		titulo.focus();
+		return false;
+	}
+	if (texto.value == "")
+	{
+		document.getElementById("noticia_error").innerHTML = "TIENE QUE ESCRIBIR UNA NOTICIA";
+		texto.focus();
+		return false;
+	}
+	if (imagen.value == "")
+	{
+		document.getElementById("noticia_error").innerHTML = "IMAGEN OBLIGATORIA";
+		imagen.focus();
+		return false;
+	}
+	if (fecha.value == "")
+	{
+		document.getElementById("noticia_error").innerHTML = "FECHA OBLIGATORIA";
+		fecha.focus();
+		return false;
+	}
+	return true;
+}
 
 function validar_banda()
 {
