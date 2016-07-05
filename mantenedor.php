@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION["usuario"]))
+	header("location:iniciarsesion.php?msg=Su session ha caducado");
+?>
+
 <?php include("phpscripts/modificar_basedatos.php"); ?>
 
 <!DOCTYPE html>
@@ -22,7 +28,7 @@
 		if (isset($_GET["borrarNoticia"]))
 		{
 			borrar_noticia($_GET['borrarNoticia']);
-			//header("location:mantenedor.php"); //<-----Evita que aparezca en la url
+			header("location:mantenedor.php"); //<-----Evita que aparezca en la url
 		}
 		//---------------------------------------------
 		//AGREGAR BANDA
@@ -71,7 +77,7 @@
 				<li><a href="#bloque_bandas">Bandas</a></li>
 				<li><a href="#bloque_cds">CDs</a></li>
 				<li><a href="#bloque_canciones">Canciones</a></li>
-				<li style="float:right"><a class="active" href="">Cerrar Sesión</a></li>
+				<li style="float:right"><a class="active" href="phpscripts/cerrar_session.php">Cerrar Sesión</a></li>
 			</ul>
 		</nav>
 			
@@ -142,7 +148,7 @@
 		            		<td><?php echo $registro["titulo"];?></td>
 		            		<td><?php echo $registro["noticia"];?></td>
 		            		<td>
-		            			<div class="centro"><img src="img/noticias/<?php echo $registro['imagen'];?>"></div>
+		            			<div class="centro"><img class="thumb100" src="img/noticias/<?php echo $registro['imagen'];?>"></div>
 		            		</td>
 		            		<td><?php echo $registro["fecha"];?></td>
 		            		<td><a href="mantenedor.php?borrarNoticia=<?php echo $registro['id'];?>">ELIMINAR</a></td>

@@ -12,7 +12,7 @@
 		<nav>
 			<ul>
 				<li><a href = "formulario.html">Registro</a></a></li>
-                <li><a href = "#">Administracion</a></a></li>
+                <li><a href = "iniciarsesion.php">Administracion</a></a></li>
 				<li><a href = "contacto.html">Contacto</a></a></li>
 			</ul>
 		</nav>
